@@ -1,18 +1,18 @@
 #include <iostream>
+#define SIZE 50
 using namespace std;
 
 void divide(int[], int, int);
 void merge(int[], int, int, int, int);
 
+int size;
+
 int main()
 {
-    int *array;
-    int size;
+    int array[50], size;
 
     cout << "Enter size of array:- ";
     cin >> size;
-
-    array = new int[size];
 
     cout << "Enter elements in the array:- " << endl;
     for (int i = 0; i < size; i++)
@@ -37,7 +37,6 @@ int main()
     }
     cout << endl;
 
-    delete[] array;
     return 0;
 }
 
@@ -55,9 +54,9 @@ void divide(int array[], int left, int right)
 void merge(int array[], int left1, int right1, int left2, int right2)
 {
     int a = left1, b = left2, k = 0;
-    int *temp = new int[right2];
+    int temp[SIZE];
 
-    while (a < right1 && b < right2)
+    while (a <= right1 && b <= right2)
     {
         if (array[a] < array[b])
         {
