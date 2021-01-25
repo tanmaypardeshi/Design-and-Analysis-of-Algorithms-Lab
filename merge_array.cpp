@@ -1,5 +1,4 @@
 #include <iostream>
-#define SIZE 50
 using namespace std;
 
 void divide(int[], int, int);
