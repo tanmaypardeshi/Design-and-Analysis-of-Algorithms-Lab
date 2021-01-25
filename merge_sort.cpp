@@ -9,7 +9,7 @@ int size;
 
 int main()
 {
-    int array[50], size;
+    int array[50], size, flag = 0;
 
     cout << "Enter size of array:- ";
     cin >> size;
@@ -19,6 +19,21 @@ int main()
     {
         cout << "Enter element " << i << ":- ";
         cin >> array[i];
+    }
+
+    for (int i = 0; i < size - 1; i++)
+    {
+        if (array[i] > array[i + 1])
+        {
+            flag = 1;
+            break;
+        }
+    }
+
+    if (!flag)
+    {
+        cout << "Array is already sorted\n";
+        return 0;
     }
 
     cout << "Unsorted array is:- ";
