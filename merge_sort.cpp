@@ -28,7 +28,7 @@ int main()
     }
     cout << endl;
 
-    divide(array, 0, size);
+    divide(array, 0, size - 1);
 
     cout << "After sorting, array is:- ";
     for (int i = 0; i < size; i++)
