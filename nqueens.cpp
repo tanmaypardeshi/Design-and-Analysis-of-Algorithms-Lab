@@ -23,6 +23,16 @@ int main()
     else
     {
         queen(1, n);
+
+        if (!cnt)
+        {
+            cout << "\nNo solutions exist for the given input!\n";
+        }
+        else
+        {
+            cout << "\n"
+                 << cnt << " solutions printed.\n ";
+        }
     }
 
     return 0;
@@ -30,8 +40,6 @@ int main()
 
 void printboard(int n)
 {
-    cout << "\nSolution " << ++cnt << ":- \n"
-         << endl;
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
@@ -64,8 +72,20 @@ int place(int k, int i)
 void queen(int k, int n)
 {
     int i;
+    if (!cnt)
+    {
+        cout << "\nThis step modifications:\n";
+        printboard(n);
+    }
+
     if (k >= n + 1)
     {
+        cnt++;
+        if (cnt == 1)
+        {
+            cout << "\n------------------------------------------------";
+        }
+        cout << "\nPossible solutuion no. " << cnt << ":\n";
         printboard(n);
         return;
     }
@@ -76,7 +96,89 @@ void queen(int k, int n)
         {
             board[k] = i;
             queen(k + 1, n);
+            if (!cnt)
+            {
+                cout << "Backtracking previous queen...\n";
+            }
             board[k] = 0;
         }
     }
 }
+
+// tanmay@Predator:~/Code/DAA$ g++ nqueens.cpp
+// tanmay@Predator:~/Code/DAA$ ./a.out
+// Enter number of queens:- 4
+
+// This step modifications:
+// 0  0  0  0
+// 0  0  0  0
+// 0  0  0  0
+// 0  0  0  0
+
+// This step modifications:
+// 1  0  0  0
+// 0  0  0  0
+// 0  0  0  0
+// 0  0  0  0
+
+// This step modifications:
+// 1  0  0  0
+// 0  0  1  0
+// 0  0  0  0
+// 0  0  0  0
+// Backtracking previous queen...
+
+// This step modifications:
+// 1  0  0  0
+// 0  0  0  1
+// 0  0  0  0
+// 0  0  0  0
+
+// This step modifications:
+// 1  0  0  0
+// 0  0  0  1
+// 0  1  0  0
+// 0  0  0  0
+// Backtracking previous queen...
+// Backtracking previous queen...
+// Backtracking previous queen...
+
+// This step modifications:
+// 0  1  0  0
+// 0  0  0  0
+// 0  0  0  0
+// 0  0  0  0
+
+// This step modifications:
+// 0  1  0  0
+// 0  0  0  1
+// 0  0  0  0
+// 0  0  0  0
+
+// This step modifications:
+// 0  1  0  0
+// 0  0  0  1
+// 1  0  0  0
+// 0  0  0  0
+
+// This step modifications:
+// 0  1  0  0
+// 0  0  0  1
+// 1  0  0  0
+// 0  0  1  0
+
+// ------------------------------------------------
+// Possible solutuion no. 1:
+// 0  1  0  0
+// 0  0  0  1
+// 1  0  0  0
+// 0  0  1  0
+
+// Possible solutuion no. 2:
+// 0  0  1  0
+// 1  0  0  0
+// 0  0  0  1
+// 0  1  0  0
+
+// 2 solutions printed.
+//  tanmay@Predator:~/Code/DAA$
