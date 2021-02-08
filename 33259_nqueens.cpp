@@ -1,3 +1,11 @@
+/*----------------------------------------------------------------------------
+Roll number: 33259
+Division: 10
+Batch: N 10
+Problem Statement: Implement N Queen's Algorithm using backtracking and 
+recursion.
+----------------------------------------------------------------------------*/
+
 #include <bits/stdc++.h>
 #define N 100
 using namespace std;
