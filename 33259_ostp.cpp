@@ -4,54 +4,37 @@ using namespace std;
 
 void divide(int[], int, int);
 void merge(int[], int, int, int, int);
+int calculate_time(int[], int[], int);
 
 int size;
 
 int main()
 {
-    int array[50], size, flag = 0;
-
-    cout << "Enter size of array:- ";
-    cin >> size;
-
-    cout << "Enter elements in the array:- " << endl;
-    for (int i = 0; i < size; i++)
+    int n, *size, *time, totalTime;
+    cout << "How many programs are there:- ";
+    cin >> n;
+    size = new int(sizeof(int) * n);
+    time = new int(sizeof(int) * n);
+    cout << "Enter the retrival time of each program:- " << endl;
+    for (int i = 0; i < n; i++)
     {
-        cout << "Enter element " << i << ":- ";
-        cin >> array[i];
+        cout << "Enter element " << i + 1 << ":- ";
+        cin >> size[i];
     }
 
-    for (int i = 0; i < size - 1; i++)
+    divide(size, 0, n - 1);
+    cout << "\nOrder is:- { ";
+    for (int i = 0; i < n; i++)
     {
-        if (array[i] > array[i + 1])
+        if (i == n - 1)
         {
-            flag = 1;
+            cout << size[i] << " }" << endl;
             break;
         }
+        cout << size[i] << " ";
     }
-
-    if (!flag)
-    {
-        cout << "Array is already sorted\n";
-        return 0;
-    }
-
-    cout << "Unsorted array is:- ";
-    for (int i = 0; i < size; i++)
-    {
-        cout << array[i] << " ";
-    }
-    cout << endl;
-
-    divide(array, 0, size - 1);
-
-    cout << "After sorting, array is:- ";
-    for (int i = 0; i < size; i++)
-    {
-        cout << array[i] << " ";
-    }
-    cout << endl;
-
+    totalTime = calculate_time(size, time, n);
+    cout << "Average seek time is : " << (float)totalTime / n << endl;
     return 0;
 }
 
@@ -104,4 +87,19 @@ void merge(int array[], int left1, int right1, int left2, int right2)
         array[a] = temp[k];
         k++;
     }
+}
+
+int calculate_time(int *size, int *array, int n)
+{
+    array[0] = size[0];
+    int sum = 0;
+    for (int i = 1; i < n; i++)
+    {
+        array[i] = array[i - 1] + size[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        sum += array[i];
+    }
+    return sum;
 }
