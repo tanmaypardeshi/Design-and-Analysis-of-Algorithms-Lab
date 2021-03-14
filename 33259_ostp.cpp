@@ -1,105 +1,104 @@
-#include <iostream>
-#define SIZE 100
+/*----------------------------------------------------------------------------
+Roll number: 33259
+Division: 10
+Batch: N 10
+Problem Statement: Optimal storage in tapes.
+----------------------------------------------------------------------------*/
+
+#include <bits/stdc++.h>
 using namespace std;
 
-void divide(int[], int, int);
-void merge(int[], int, int, int, int);
-int calculate_time(int[], int[], int);
-
-int size;
-
+int volume(vector<int> v)
+{
+    int total = 0;
+    if (v.size() == 0)
+    {
+        return 0;
+    }
+    for (auto x : v)
+    {
+        total += x;
+    }
+    return total;
+}
 int main()
 {
-    int n, *size, *time, totalTime;
-    cout << "How many programs are there:- ";
-    cin >> n;
-    size = new int(sizeof(int) * n);
-    time = new int(sizeof(int) * n);
-    cout << "Enter the retrival time of each program:- " << endl;
-    for (int i = 0; i < n; i++)
+    vector<vector<int>> tapes;
+    vector<int> original, sizes;
+
+    float mrt;
+
+    int no_tapes, no_programs, buffer, flag, cntr;
+
+    cout << "Enter the number of tapes:- ";
+    cin >> no_tapes;
+
+    cout << "\nEnter the size of each tape:- " << endl;
+    for (int i = 0; i < no_tapes; i++)
     {
-        cout << "Enter element " << i + 1 << ":- ";
-        cin >> size[i];
+        cout << "Enter size of tape " << i << ":- ";
+        cin >> buffer;
+        sizes.push_back(buffer);
+        tapes.push_back(vector<int>());
     }
 
-    divide(size, 0, n - 1);
-    cout << "\nOrder is:- { ";
-    for (int i = 0; i < n; i++)
+    cout << "\nEnter the number of programs:- ";
+    cin >> no_programs;
+    cout << "\nEnter the programs:- \n";
+    for (int i = 0; i < no_programs; i++)
     {
-        if (i == n - 1)
+        cout << "Enter the length of program " << i + 1 << ":- ";
+        cin >> buffer;
+        original.push_back(buffer);
+    }
+
+    cout << "\nOriginal array is:- ";
+    for (auto x : original)
+    {
+        cout << x << "\t";
+    }
+    cout << endl;
+
+    sort(original.begin(), original.end());
+
+    cout << "Sorted array is:- ";
+    for (auto x : original)
+    {
+        cout << x << "\t";
+    }
+    cout << endl;
+
+    buffer = 0;
+
+    for (int i = 0; i < no_programs; i++)
+    {
+        int j = buffer % tapes.size();
+        if (sizes[j] >= volume(tapes[j]) + original[i])
         {
-            cout << size[i] << " }" << endl;
-            break;
-        }
-        cout << size[i] << " ";
-    }
-    totalTime = calculate_time(size, time, n);
-    cout << "Average seek time is : " << (float)totalTime / n << endl;
-    return 0;
-}
-
-void divide(int array[], int left, int right)
-{
-    if (left < right)
-    {
-        int mid = (left + right) / 2;
-        divide(array, left, mid);
-        divide(array, mid + 1, right);
-        merge(array, left, mid, mid + 1, right);
-    }
-}
-
-void merge(int array[], int left1, int right1, int left2, int right2)
-{
-    int a = left1, b = left2, k = 0;
-    int temp[SIZE];
-
-    while (a <= right1 && b <= right2)
-    {
-        if (array[a] < array[b])
-        {
-            temp[k] = array[a];
-            a++;
+            flag = 0;
+            tapes[j].push_back(original[i]);
         }
         else
         {
-            temp[k] = array[b];
-            b++;
+            i--;
+            flag++;
         }
-        k++;
+        buffer++;
+        if (flag >= no_tapes)
+        {
+            break;
+        }
     }
-    while (a <= right1)
-    {
-        temp[k] = array[a];
-        a++;
-        k++;
-    }
-    while (b <= right2)
-    {
-        temp[k] = array[b];
-        b++;
-        k++;
-    }
-    k = 0;
 
-    for (a = left1; a <= right2; a++)
+    cout << "\nContents of the tape are:- \n";
+    cntr = 1;
+    for (auto x : tapes)
     {
-        array[a] = temp[k];
-        k++;
+        cout << "Tape number " << cntr++ << ":- ";
+        for (auto y : x)
+        {
+            cout << y << "\t";
+        }
+        cout << endl;
     }
-}
-
-int calculate_time(int *size, int *array, int n)
-{
-    array[0] = size[0];
-    int sum = 0;
-    for (int i = 1; i < n; i++)
-    {
-        array[i] = array[i - 1] + size[i];
-    }
-    for (int i = 0; i < n; i++)
-    {
-        sum += array[i];
-    }
-    return sum;
 }
