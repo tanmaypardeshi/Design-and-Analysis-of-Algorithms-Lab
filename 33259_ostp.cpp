@@ -8,6 +8,16 @@ Problem Statement: Optimal storage in tapes.
 #include <bits/stdc++.h>
 using namespace std;
 
+float calculate(vector<int> tape)
+{
+    if (tape.size() == 0)
+        return 0;
+    float rt = 0;
+    for (int y = 0; y < tape.size(); y++)
+        rt += tape[y];
+    return rt / (float)tape.size();
+}
+
 int volume(vector<int> v)
 {
     int total = 0;
@@ -25,8 +35,6 @@ int main()
 {
     vector<vector<int>> tapes;
     vector<int> original, sizes;
-
-    float mrt;
 
     int no_tapes, no_programs, buffer, flag, cntr;
 
@@ -101,4 +109,13 @@ int main()
         }
         cout << endl;
     }
+
+    cout << "\nMean Retirval Time of Tapes:-";
+    cntr = 1;
+    for (auto x : tapes)
+    {
+        cout << "\nMRT of tape " << cntr + 1 << ":- " << calculate(x);
+    }
+
+    return 0;
 }
