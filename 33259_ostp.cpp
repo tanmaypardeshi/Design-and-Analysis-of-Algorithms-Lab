@@ -112,7 +112,7 @@ int main()
     {
         float temp = calculate_mrt(x);
         mrt += temp;
-        cout << "\nMean Retrieval time of tape " << cntr + 1 << ":- " << temp;
+        cout << "\nMean Retrieval time of tape " << cntr << ":- " << temp;
         cntr++;
     }
     cout << "\nTotal Mean Retrieval Time of Tapes is:- " << mrt / no_tapes;
@@ -186,15 +186,14 @@ Tape number 2:- 3       5       6
 Tape number 3:- 4       5       7
 
 Average Retrieval Time of Tapes:-
-Average Retrieval time of tape 2:- 4
+Average Retrieval time of tape 1:- 4
 Average Retrieval time of tape 2:- 4.66667
-Average Retrieval time of tape 2:- 5.33333
+Average Retrieval time of tape 3:- 5.33333
 Total Average Retrieval Time of Tapes is:- 4.66667
 
 Mean Retrieval Time of Tapes:- 
-Mean Retrieval time of tape 2:- 7.33333
+Mean Retrieval time of tape 1:- 7.33333
 Mean Retrieval time of tape 2:- 9.33333
-Mean Retrieval time of tape 2:- 11
+Mean Retrieval time of tape 3:- 11
 Total Mean Retrieval Time of Tapes is:- 9.22222
-
 */
