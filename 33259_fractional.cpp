@@ -77,3 +77,19 @@ int main()
     delete[] arr;
     return 0;
 }
+
+/* Output - 
+
+tanmay@Predator:~/Code/DAA$ g++ 33259_fractional.cpp 
+tanmay@Predator:~/Code/DAA$ ./a.out 
+Enter total capacity of knapsack:- 50
+Enter number of items:- 3
+Enter weight of object 1:- 10
+Enter value of object 1:- 60
+Enter weight of object 2:- 20
+Enter value of object 2:- 100
+Enter weight of object 3:- 30
+Enter value of object 3:- 120
+Maximum value we can obtain: 240
+
+*/
