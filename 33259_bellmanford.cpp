@@ -65,7 +65,7 @@ void bellman(Graph *graph, int src)
     {
         if (dist[graph->edge[i].destination] > dist[graph->edge[i].source] + graph->edge[i].weight)
         {
-            cout << "\nNo solution" << endl;
+            cout << "Negative cycle found" << endl;
             return;
         }
     }
@@ -97,10 +97,125 @@ int main()
         cout << "Enter weight for edge " << i + 1 << ":- ";
         cin >> graph->edge[i].weight;
     }
-
-    cout << endl;
+    cout << "\nGraph is:- \n"
+         << endl;
+    for (int i = 0; i < e; i++)
+    {
+        cout << "(" << graph->edge[i].source << "," << graph->edge[i].destination << ") -> " << graph->edge[i].weight << endl;
+        cout << endl;
+    }
 
     bellman(graph, 0);
 
     return 0;
 }
+
+/* Output :- 
+
+tanmay@Predator:~/Code/DAA$ g++ 33259_bellmanford.cpp 
+tanmay@Predator:~/Code/DAA$ ./a.out 
+Enter the number of vertices:- 7
+Enter the number of edges:- 10
+
+Enter source for edge 1:- 0
+Enter destination for edge 1:- 1
+Enter weight for edge 1:- 6
+
+Enter source for edge 2:- 0
+Enter destination for edge 2:- 2
+Enter weight for edge 2:- 5
+
+Enter source for edge 3:- 0
+Enter destination for edge 3:- 3
+Enter weight for edge 3:- 5
+
+Enter source for edge 4:- 1
+Enter destination for edge 4:- 4
+Enter weight for edge 4:- -1
+
+Enter source for edge 5:- 2
+Enter destination for edge 5:- 1
+Enter weight for edge 5:- -2
+
+Enter source for edge 6:- 2
+Enter destination for edge 6:- 4
+Enter weight for edge 6:- 1
+
+Enter source for edge 7:- 3
+Enter destination for edge 7:- 2
+Enter weight for edge 7:- -2
+
+Enter source for edge 8:- 3
+Enter destination for edge 8:- 5
+Enter weight for edge 8:- -1
+
+Enter source for edge 9:- 5
+Enter destination for edge 9:- 6
+Enter weight for edge 9:- 3
+
+Enter source for edge 10:- 4
+Enter destination for edge 10:- 6
+Enter weight for edge 10:- 3
+
+Graph is:- 
+
+(0,1) -> 6
+
+(0,2) -> 5
+
+(0,3) -> 5
+
+(1,4) -> -1
+
+(2,1) -> -2
+
+(2,4) -> 1
+
+(3,2) -> -2
+
+(3,5) -> -1
+
+(5,6) -> 3
+
+(4,6) -> 3
+
+Distance from source is:- 0. The path is:- 0 
+Distance from source is:- 1. The path is:- 0 3 2 1 
+Distance from source is:- 3. The path is:- 0 3 2 
+Distance from source is:- 5. The path is:- 0 3 
+Distance from source is:- 0. The path is:- 0 3 2 1 4 
+Distance from source is:- 4. The path is:- 0 3 5 
+Distance from source is:- 3. The path is:- 0 3 2 1 4 6 
+
+tanmay@Predator:~/Code/DAA$ ./a.out 
+Enter the number of vertices:- 4
+Enter the number of edges:- 4
+
+Enter source for edge 1:- 0
+Enter destination for edge 1:- 1
+Enter weight for edge 1:- 1
+
+Enter source for edge 2:- 1
+Enter destination for edge 2:- 2
+Enter weight for edge 2:- -1
+
+Enter source for edge 3:- 2
+Enter destination for edge 3:- 3
+Enter weight for edge 3:- -1
+
+Enter source for edge 4:- 3
+Enter destination for edge 4:- 0
+Enter weight for edge 4:- -1
+
+Graph is:- 
+
+(0,1) -> 1
+
+(1,2) -> -1
+
+(2,3) -> -1
+
+(3,0) -> -1
+
+Negative cycle found
+*/
