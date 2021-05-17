@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Structure for Edge
 typedef struct edge
 {
     int source;
@@ -8,12 +9,14 @@ typedef struct edge
     int weight;
 } Edge;
 
+// Structure for Graph
 typedef struct graph
 {
     int vertices, edges;
     Edge *edge;
 } Graph;
 
+// Create graph
 Graph *create(int v, int e)
 {
     Graph *graph = new Graph;
@@ -23,6 +26,7 @@ Graph *create(int v, int e)
     return graph;
 }
 
+// Print the path of from source till the destination
 void printPath(int parent[], int vertex)
 {
     if (vertex < 0)
@@ -31,6 +35,7 @@ void printPath(int parent[], int vertex)
     cout << vertex << " ";
 }
 
+// Relaxation process
 void relax(int u, int v, int weight, int dist[], int parent[])
 {
     if (dist[v] > dist[u] + weight)
@@ -40,20 +45,25 @@ void relax(int u, int v, int weight, int dist[], int parent[])
     }
 }
 
+// Bellman ford algorithm
 void bellman(Graph *graph, int src)
 {
+    // Initialise vertices and edges
     int v = graph->vertices;
     int e = graph->edges;
     int *dist = new int[v];
     int *parent = new int[v];
+
+    // Initialise distance and parent matrix
     for (int i = 0; i < v; i++)
     {
         dist[i] = INT32_MAX;
         parent[i] = -1;
     }
-
+    // Distance of source is always 0
     dist[src] = 0;
 
+    // Iterate the graph v - 1 times and relax all edges
     for (int i = 1; i < v - 1; i++)
     {
         for (int j = 0; j < e; j++)
@@ -61,6 +71,8 @@ void bellman(Graph *graph, int src)
             relax(graph->edge[j].source, graph->edge[j].destination, graph->edge[j].weight, dist, parent);
         }
     }
+
+    // Iterate vth time and see if it is still relaxing. If yes, then a negative cycle is found.
     for (int i = 0; i < e; i++)
     {
         if (dist[graph->edge[i].destination] > dist[graph->edge[i].source] + graph->edge[i].weight)
@@ -69,6 +81,8 @@ void bellman(Graph *graph, int src)
             return;
         }
     }
+
+    // If negative cycle is not found, print the distance of vertex from source and the path using printPath()
     for (int i = 0; i < v; i++)
     {
         cout << "Distance from source is:- " << dist[i];
@@ -80,6 +94,7 @@ void bellman(Graph *graph, int src)
 
 int main()
 {
+    // Input and create the graph
     int v, e;
     cout << "Enter the number of vertices:- ";
     cin >> v;
@@ -97,6 +112,8 @@ int main()
         cout << "Enter weight for edge " << i + 1 << ":- ";
         cin >> graph->edge[i].weight;
     }
+
+    // Display the graph
     cout << "\nGraph is:- \n"
          << endl;
     for (int i = 0; i < e; i++)
