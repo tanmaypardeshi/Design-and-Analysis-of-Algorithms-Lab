@@ -96,6 +96,8 @@ int main()
 {
     // Input and create the graph
     int v, e;
+    int src, dest;
+    bool flag = true;
     cout << "Enter the number of vertices:- ";
     cin >> v;
     cout << "Enter the number of edges:- ";
@@ -105,12 +107,48 @@ int main()
 
     for (int i = 0; i < e; i++)
     {
+        flag = true;
         cout << "\nEnter source for edge " << i + 1 << ":- ";
-        cin >> graph->edge[i].source;
+        cin >> src;
+        if (src >= v)
+        {
+            cout << "\nPlease enter the source within range" << endl;
+            i--;
+            continue;
+        }
+        else
+        {
+            graph->edge[i].source = src;
+        }
+
         cout << "Enter destination for edge " << i + 1 << ":- ";
-        cin >> graph->edge[i].destination;
-        cout << "Enter weight for edge " << i + 1 << ":- ";
-        cin >> graph->edge[i].weight;
+        cin >> dest;
+        if (dest >= v)
+        {
+            cout << "\nPlease enter the destination within range" << endl;
+            i--;
+            continue;
+        }
+        else
+        {
+            graph->edge[i].destination = dest;
+        }
+
+        for (int j = 0; j < i; j++)
+        {
+            if (graph->edge[j].source == graph->edge[i].source && graph->edge[j].destination == graph->edge[i].destination)
+            {
+                cout << "\nThis edge already exists!" << endl;
+                i--;
+                flag = false;
+                break;
+            }
+        }
+        if (flag)
+        {
+            cout << "Enter weight for edge " << i + 1 << ":- ";
+            cin >> graph->edge[i].weight;
+        }
     }
 
     // Display the graph
