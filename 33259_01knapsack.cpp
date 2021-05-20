@@ -63,3 +63,20 @@ int knapsack(int wt[], int val[], int W, int n)
 
     return dp[n][W];
 }
+
+/* Output - 
+
+tanmay@Predator:~/Code/DAA$ g++ 33259_01knapsack.cpp 
+tanmay@Predator:~/Code/DAA$ ./a.out 
+Enter the number of elements:- 3
+Enter the weight of knapsack:- 50
+Enter weight of item 1:- 10
+Enter value of item 1:- 60
+Enter weight of item 2:- 20
+Enter value of item 2:- 100
+Enter weight of item 3:- 30
+Enter value of item 3:- 120
+Maximum total value in the knapsack:- 220
+tanmay@Predator:~/Code/DAA$ 
+
+*/
